@@ -1,0 +1,138 @@
+﻿<UserControl x:Class="ClienteServidorProyectoU3.Views.UserControls.DetalleActividad"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ClienteServidorProyectoU3.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Background="#f8f8f8">
+
+    <Border Background="White" Style="{StaticResource brdSombra}" CornerRadius="3" Padding="20" MaxHeight="600" MaxWidth="800">
+
+        <DockPanel>
+            <Button DockPanel.Dock="Top" HorizontalAlignment="Right" Background="Transparent" BorderBrush="Transparent" Command="{Binding CancelarCommand}">
+                <Image Source="../../resources/img/MaterialSymbolsClose.png" Width="30" Height="30"/>
+            </Button>
+
+            <TextBlock DockPanel.Dock="Bottom" Text="{Binding Mensaje}" Style="{StaticResource txtBError}"/>
+
+            <ScrollViewer>
+
+                <DockPanel>
+                    <WrapPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Visibility="Collapsed">
+                        <Button Style="{StaticResource btnCancelar}"  Margin="0,0,30,0" Content="Cancelar"/>
+                        <Button Style="{StaticResource btnAceptar}" Margin="30,0,0,0" Content="Aceptar"/>
+                    </WrapPanel>
+
+                    <DockPanel DockPanel.Dock="Top">
+                        <Label FontWeight="Bold" FontSize="20" Foreground="#1B3A6B" 
+                       HorizontalAlignment="Left">Detalles</Label>
+
+                        <WrapPanel DockPanel.Dock="Right"
+                           HorizontalAlignment="Right">
+                            <Button Margin="5,0,0,0" Content="Guardar Cambios" Command="{Binding EditarActividadCommand}">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource btnCancelar}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsReadOnly}" Value="True">
+                                                <Setter Property="Visibility" Value="Hidden"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+
+                            <Button Margin="10,0,0,0" Content="Eliminar" Command="{Binding EliminarActividadCommand}">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource btnCancelar}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsReadOnly}" Value="True">
+                                                <Setter Property="Visibility" Value="Hidden"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </WrapPanel>
+
+                    </DockPanel>
+
+                    <Border DockPanel.Dock="Top" BorderThickness=".3" BorderBrush="#9A9A9C" Margin="10"/>
+
+                    <StackPanel>
+                        <UniformGrid Columns="2">
+                            <StackPanel Margin="0,0,5,0">
+                                <Label>Título:</Label>
+                                <Border Style="{StaticResource brdTextBox}">
+                                    <TextBox Text="{Binding ActividadActual.Titulo}" IsReadOnly="{Binding IsReadOnly}"></TextBox>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel Margin="5,0,0,0">
+                                <Label>Fecha:</Label>
+                                <DatePicker BorderBrush="#D7D7D9" SelectedDate="{Binding FechaRealizacionActActual}">
+                                    <DatePicker.Style>
+                                        <Style TargetType="DatePicker">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsReadOnly}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </DatePicker.Style>
+                                </DatePicker>
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <Label>Descripción:</Label>
+                        <Border Style="{StaticResource brdTextBox}">
+                            <TextBox Text="{Binding ActividadActual.Descripcion}"  IsReadOnly="{Binding IsReadOnly}"></TextBox>
+                        </Border>
+
+                        <UniformGrid Columns="2">
+
+                            <StackPanel Margin="0,0,5,0">
+                                <Label>Estado:</Label>
+                                <ComboBox Background="White" ItemsSource="{Binding Estados}" DisplayMemberPath="Text" SelectedItem="{Binding EstadoActualAct}" 
+                                      >
+                                    <ComboBox.Style>
+                                        <Style TargetType="ComboBox">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsReadOnly}" Value="True">
+                                                    <Setter Property="IsEnabled" Value="False"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ComboBox.Style>
+                                </ComboBox>
+                            </StackPanel>
+                        </UniformGrid>
+
+                        <WrapPanel>
+                            <Label>Evidencia:</Label>
+                            <TextBlock x:Name="TxtFile" Text="{Binding NombreNuevoArchivo}"/>
+                        </WrapPanel>
+                        <Button Click="Button_Click" Content="Cambiar evidencia...">
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource btnElegirArchivo}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsReadOnly}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+
+                        <Image Source="{Binding ActividadActual.Evidencia}"/>
+
+                    </StackPanel>
+                </DockPanel>
+            </ScrollViewer>
+
+        </DockPanel>
+        
+    </Border>
+
+</UserControl>

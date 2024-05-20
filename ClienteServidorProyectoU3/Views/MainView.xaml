@@ -1,0 +1,65 @@
+﻿<Window x:Class="ClienteServidorProyectoU3.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClienteServidorProyectoU3.Views"
+        xmlns:vm="clr-namespace:ClienteServidorProyectoU3.ViewModels"
+        xmlns:uc="clr-namespace:ClienteServidorProyectoU3.Views.UserControls"
+        mc:Ignorable="d"
+        Title="MainView" MinHeight="720" MinWidth="1280" Loaded="Window_Loaded">
+
+
+    <Window.Resources>
+        <local:LoginView x:Key="Login"/>
+        <local:ActividadesView x:Key="Act"/>
+        <uc:DetalleActividad x:Key="DetAct"/>
+        <local:RegistrarActividadesView x:Key="RegAct"/>
+        <uc:DeptsView x:Key="Dept"/>
+        <uc:DetalleDept x:Key="DetDept"/>
+        <uc:RegistrarDept x:Key="RegDept"/>
+    </Window.Resources>
+    <Grid>
+        <DockPanel>
+
+            <ContentControl>
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <!--<Setter Property="Content" Value="{StaticResource Act}"/>-->
+                        <Style.Triggers>
+
+                            <DataTrigger Binding="{Binding VistaActual}" Value="Login">
+                                <Setter Property="Content" Value="{StaticResource Login}"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding VistaActual}" Value="Act">
+                                <Setter Property="Content" Value="{StaticResource Act}"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding VistaActual}" Value="DetAct">
+                                <Setter Property="Content" Value="{StaticResource DetAct}"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding VistaActual}" Value="RegAct">
+                                <Setter Property="Content" Value="{StaticResource RegAct}"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding VistaActual}" Value="Dept">
+                                <Setter Property="Content" Value="{StaticResource Dept}"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding VistaActual}" Value="DetDept">
+                                <Setter Property="Content" Value="{StaticResource DetDept}"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding VistaActual}" Value="RegDept">
+                                <Setter Property="Content" Value="{StaticResource RegDept}"/>
+                            </DataTrigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+        </DockPanel>
+    </Grid>
+</Window>
